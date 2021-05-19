@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 4000;
+const port = process.env.PORT || 4000;
 const path = require('path')
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -27,7 +27,8 @@ app.get('/view', (req, res) => {
                 <div class="holderspesh">
                 <h1>${title}</h1>
                 <br><br>
-                <img src=${img}>
+                <img src=${img}><br><br>
+                <button onclick="window.close()">Close</button>
             </div>
                 </div>
         </div>
@@ -37,3 +38,4 @@ app.get('/view', (req, res) => {
 })
 
 app.listen(port, () => console.log('Listening on port ' + port))
+// console.log(process.argv[2])

@@ -29,7 +29,7 @@ app.get('/view', (req, res) => {
                 <h1>${title}</h1>
                 <br><br>
                 <img src=${img}><br><br>
-                <button onclick="window.close()">Close</button>
+                <button onclick="window.close()" style="width:50%;">Close</button>
             </div>
                 </div>
         </div>

@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get('/view', (req, res) => {
     let img = req.query.img
     let title = req.query.title
-    let preview = req.query.preview
+    // let preview = req.query.preview
     res.send(`
     <html lang="en">
     <head>
@@ -16,8 +16,9 @@ app.get('/view', (req, res) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <meta property="og:image" content="${preview}">
+        <meta property="og:image" content="${img}">
         <meta name="author" content="koneko">
+        <meta property="og:title" content="${title}">
         <title>${title}</title>
     </head>
     <body>

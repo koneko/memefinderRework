@@ -19,15 +19,15 @@ async function getMemes(num) {
         .then(response => response.json())
         .then(data => {
             data.memes.forEach(meme => {
-                let title1 = meme.title.replace('"', '\"')
-                let title2 = meme.title.replace("'", "\'")
+                let title1 = meme.title.replace('"', '')
+                let title2 = meme.title.replace("'", "")
                 let div = document.createElement('div')
                 if (meme.preview[2] == undefined) {
                     div.innerHTML =
                         `
                 <h3>${meme.title}</h3>
                 <img src="${meme.preview[0]}"><br><br>
-                <button onclick='raw("${meme.url}", "${title2}")'>View</button>
+                <button onclick='raw("${meme.url}", "${title2}", "${meme.author}", "${meme.subreddit}")'>View</button>
                 <button onclick="memeDelete(this.parentNode)">Remove meme</button>
                 `
                 } else {
@@ -35,7 +35,7 @@ async function getMemes(num) {
                         `
                 <h3>${meme.title}</h3>
                 <img src="${meme.preview[2]}"><br><br>
-                <button onclick='raw("${meme.url}", "${title2}")'>View</button>
+                <button onclick='raw("${meme.url}", "${title2}", "${meme.author}", "${meme.subreddit}")'>View</button>
                 <button onclick="memeDelete(this.parentNode)">Remove meme</button>
                 `
                 }
@@ -43,7 +43,6 @@ async function getMemes(num) {
                 holder.appendChild(div)
             })
             let br = document.createElement('br')
-            // let holder = document.querySelector('.holder')
             let buttondiv = document.createElement('div')
             buttondiv.className = "buttondiv"
             let button = document.createElement("button")
@@ -90,8 +89,8 @@ function memeDelete(meme) {
 }
 
 
-function raw(img, title) {
-    window.open(window.location.href + `view?img=${img}&title=${title}`)
+function raw(img, title, author, subreddit) {
+    window.open(window.location.href + `view?img=${img}&title=${title}&author=${author}&sub=${subreddit}`)
 }
 
 function addButton() {

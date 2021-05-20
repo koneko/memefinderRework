@@ -8,7 +8,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get('/view', (req, res) => {
     let img = req.query.img
     let title = req.query.title
-    // let preview = req.query.preview
+    let author = req.query.author
+    let sub = req.query.sub
     res.send(`
     <html lang="en">
     <head>
@@ -27,7 +28,8 @@ app.get('/view', (req, res) => {
             <div class="contentspesh">
                 <div class="holderspesh">
                 <h1>${title}</h1>
-                <br><br>
+                <p>Author: <b>${author}</b></p>
+                <p>Posted on <b>r/${sub}</b></p><br>
                 <img src=${img}><br><br>
                 <div style="display: flex; justify-content: center;">
                 <button onclick="window.close()" style="width:50%;">Close</button>

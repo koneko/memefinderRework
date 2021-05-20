@@ -5,7 +5,7 @@ async function gotoHome() {
         let holder = document.createElement('div')
         holder.className = 'holder'
         main.appendChild(holder)
-        getMemes(50)
-        console.log('Home page active.')
+        await getMemes(50)
+
     }
 }

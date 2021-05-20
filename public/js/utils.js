@@ -15,20 +15,19 @@ function pageLoad(page, content) {
 
 async function getMemes(num) {
     let holder = document.querySelector('.holder')
-    if (document.querySelector('.getmemesbutton')) {
-        removeButton()
-    }
     fetch(`https://meme-api.herokuapp.com/gimme/${num}`)
         .then(response => response.json())
         .then(data => {
             data.memes.forEach(meme => {
+                let title1 = meme.title.replace('"', '\"')
+                let title2 = meme.title.replace("'", "\'")
                 let div = document.createElement('div')
                 if (meme.preview[2] == undefined) {
                     div.innerHTML =
                         `
                 <h3>${meme.title}</h3>
                 <img src="${meme.preview[0]}"><br><br>
-                <button onclick='raw("${meme.url}", "${meme.title}", "${meme.preview[0]}")'>View</button>
+                <button onclick='raw("${meme.url}", "${title2}")'>View</button>
                 <button onclick="memeDelete(this.parentNode)">Remove meme</button>
                 `
                 } else {
@@ -36,14 +35,27 @@ async function getMemes(num) {
                         `
                 <h3>${meme.title}</h3>
                 <img src="${meme.preview[2]}"><br><br>
-                <button onclick='raw("${meme.url}", "${meme.title}", "${meme.preview[2]}")'>View</button>
+                <button onclick='raw("${meme.url}", "${title2}"'>View</button>
                 <button onclick="memeDelete(this.parentNode)">Remove meme</button>
                 `
                 }
                 div.className = 'meme'
                 holder.appendChild(div)
-            });
-            addButton()
+            })
+            let br = document.createElement('br')
+            // let holder = document.querySelector('.holder')
+            let buttondiv = document.createElement('div')
+            buttondiv.className = "buttondiv"
+            let button = document.createElement("button")
+            button.className = "getmemesbutton"
+            buttondiv.style.textAlign = 'center'
+            button.innerText = "More memes"
+            button.onclick = () => getMemes(50)
+            holder.appendChild(br)
+            holder.appendChild(buttondiv)
+            buttondiv.appendChild(button)
+            console.log('Home page active.')
+            // addButton()
         });
 }
 

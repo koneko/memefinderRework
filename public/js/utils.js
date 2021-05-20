@@ -35,7 +35,7 @@ async function getMemes(num) {
                         `
                 <h3>${meme.title}</h3>
                 <img src="${meme.preview[2]}"><br><br>
-                <button onclick='raw("${meme.url}", "${title2}"'>View</button>
+                <button onclick='raw("${meme.url}", "${title2}")'>View</button>
                 <button onclick="memeDelete(this.parentNode)">Remove meme</button>
                 `
                 }
@@ -90,8 +90,8 @@ function memeDelete(meme) {
 }
 
 
-function raw(img, title, preview) {
-    window.open(window.location.href + `view?img=${img}&title=${title}&preview=${preview}`)
+function raw(img, title) {
+    window.open(window.location.href + `view?img=${img}&title=${title}`)
 }
 
 function addButton() {
